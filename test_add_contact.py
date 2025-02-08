@@ -11,11 +11,13 @@ class TestAddContact(unittest.TestCase):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -26,7 +28,8 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
 
-    def create_contact(self, wd, contact):
+    def create_contact(self, contact):
+        wd = self.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         # first name
@@ -106,25 +109,25 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("ayear").send_keys("dfgd")
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
-        self.return_to_homepage(wd)
+        self.return_to_homepage()
 
 
-    def return_to_homepage(self, wd):
+    def return_to_homepage(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
 
-    def logout(self, wd):
-        # logout
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
 
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Contact(firstname= "dfgdfgdf",middlename= "dfgdfg", lastname= "dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
+        self.login(username="admin", password="secret")
+        self.create_contact(Contact(firstname= "dfgdfgdf",middlename= "dfgdfg", lastname= "dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
                             home="dfgdgdf", mobile="dfgdgdfg", work="dfgdgdfg", fax="dfgdfgdfg", email_1="dfgdgdfg", email_2="dfgdfgdfg", email_3="dfgdgdfgd",
                             homepage="dfgdfgdfgdfg"))
-        self.logout(wd)
+        self.logout()
 
 
     def is_element_present(self, how, what):
