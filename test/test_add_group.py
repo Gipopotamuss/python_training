@@ -14,14 +14,14 @@ def app(request):
 
 
 def test_add_group(app):
-    app.login(username="admin", password= "secret")
+    app.session.login(username="admin", password= "secret")
     app.create_group(Group(name="hgjhgjghjg", header="ghjghjghjghj", footer="ghjghjgjghj"))
-    app.logout()
+    app.session.logout()
 
 def test_add_empty_group(app):
-    app.login(username="admin", password= "secret")
+    app.session.login(username="admin", password= "secret")
     app.create_group(Group(name="", header="", footer=""))
-    app.logout()
+    app.session.logout()
 
 def is_element_present(self, how, what):
     try: self.wd.find_element(by=how, value=what)
