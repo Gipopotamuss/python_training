@@ -2,22 +2,22 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import pytest
-from contact import Contact
-from application_contact import Application_contact
+from model.contact import Contact
+from fixture.application import Application
 
 @pytest.fixture()
 def app(request):
-    fixture = Application_contact()
+    fixture = Application()
     request.addfinalizer(fixture.destroy)
     return fixture
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
-    app.create_contact(Contact(firstname= "dfgdfgdf",middlename= "dfgdfg", lastname= "dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
-                            home="dfgdgdf", mobile="dfgdgdfg", work="dfgdgdfg", fax="dfgdfgdfg", email_1="dfgdgdfg", email_2="dfgdfgdfg", email_3="dfgdgdfgd",
-                            homepage="dfgdfgdfgdfg"))
-    app.logout()
+    app.session.login(username="admin", password="secret")
+    app.contact.create(Contact(firstname="dfgdfgdf", middlename="dfgdfg", lastname="dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
+                               home="dfgdgdf", mobile="dfgdgdfg", work="dfgdgdfg", fax="dfgdfgdfg", email_1="dfgdgdfg", email_2="dfgdfgdfg", email_3="dfgdgdfgd",
+                               homepage="dfgdfgdfgdfg"))
+    app.session.logout()
 
 
 def is_element_present(self, how, what):
