@@ -2,8 +2,8 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import pytest
-from group import Group
-from application import Application
+from model.group import Group
+from fixture.application import Application
 
 
 @pytest.fixture()
