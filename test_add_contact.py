@@ -15,6 +15,7 @@ class TestAddContact(unittest.TestCase):
         wd.get("http://localhost/addressbook/")
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -89,26 +90,23 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
         # birthday
-        Select(wd.find_element_by_name("bday")).select_by_visible_text("25")
         wd.find_element_by_xpath("//option[@value='25']").click()
         wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text("November")
         wd.find_element_by_xpath("//option[@value='November']").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("dfg")
         # anniversary
         wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text("25")
         wd.find_element_by_xpath("//div[@id='content']/form/select[3]/option[27]").click()
         wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text("November")
         wd.find_element_by_xpath("//div[@id='content']/form/select[4]/option[12]").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("dfgd")
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
+        self.return_to_homepage(wd)
 
 
     def return_to_homepage(self, wd):
@@ -122,12 +120,10 @@ class TestAddContact(unittest.TestCase):
 
     def test_add_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, Contact(firstname= "dfgdfgdf",middlename= "dfgdfg", lastname= "dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
                             home="dfgdgdf", mobile="dfgdgdfg", work="dfgdgdfg", fax="dfgdfgdfg", email_1="dfgdgdfg", email_2="dfgdfgdfg", email_3="dfgdgdfgd",
                             homepage="dfgdfgdfgdfg"))
-        self.return_to_homepage(wd)
         self.logout(wd)
 
 
