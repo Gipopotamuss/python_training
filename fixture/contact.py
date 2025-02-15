@@ -3,6 +3,10 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+    def open_homepage(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -46,7 +50,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_homepage()
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         self.init(contact)
@@ -54,9 +58,10 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
         self.return_to_homepage()
 
+
     def edit_first_contact(self,new_contact_data):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_homepage()
         # edit first contact
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
         self.init(new_contact_data)
@@ -65,7 +70,7 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_homepage()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # submit deletion
@@ -77,5 +82,5 @@ class ContactHelper:
 
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_homepage()
         return len(wd.find_elements_by_name("selected[]"))
