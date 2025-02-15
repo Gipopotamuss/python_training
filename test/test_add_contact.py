@@ -5,11 +5,9 @@ from model.contact import Contact
 
 
 def test_add_contact(app):
-    app.session.login(username="admin", password="secret")
     app.contact.create(Contact(firstname="dfgdfgdf", middlename="dfgdfg", lastname="dfgdfg", nickname="dfgdfgdfg", title="dfgdfgdfg", company="dfgdgdfg", address="dfgdfgdfgdfg",
                                home="dfgdgdf", mobile="dfgdgdfg", work="dfgdgdfg", fax="dfgdfgdfg", email_1="dfgdgdfg", email_2="dfgdfgdfg", email_3="dfgdgdfgd",
                                homepage="dfgdfgdfgdfg"))
-    app.session.logout()
 
 
 def is_element_present(self, how, what):
