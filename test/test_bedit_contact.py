@@ -1,10 +1,12 @@
 from model.contact import Contact
+from random import randrange
 
 def test_edit_contact_firstname(app):
-    old_contacts = app.contact.get_contact_list()
-    contact = Contact(firstname="New firstname")
     if app.contact.count() == 0:
         app.contact.create(Contact(firstname="test"))
+    old_contacts = app.contact.get_contact_list()
+    contact = Contact(firstname="New firstname")
+    contact.id = old_contacts[0].id
     app.contact.edit_first_contact(contact)
     assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contact_list()
