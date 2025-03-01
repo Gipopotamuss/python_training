@@ -123,9 +123,11 @@ class ContactHelper:
                         f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[6]").text
                     all_emails = wd.find_element_by_xpath(
                         f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[5]").text
+                    address = wd.find_element_by_xpath(
+                        f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[4]").text
                     self.contact_cache.append(Contact(firstname=firstname, lastname=lastname,
                                                       id=id, all_phones_from_home_page=all_phones,
-                                                      all_emails_from_home_page=all_emails))
+                                                      all_emails_from_home_page=all_emails, address=address))
                     index += 1
         return list(self.contact_cache)
 
@@ -151,9 +153,10 @@ class ContactHelper:
         email_1 = wd.find_element_by_name("email").get_attribute("value")
         email_2 = wd.find_element_by_name("email2").get_attribute("value")
         email_3 = wd.find_element_by_name("email3").get_attribute("value")
+        address = wd.find_element_by_name("address").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id,
                        home=home, mobile=mobile, work=work,
-                       email_1=email_1, email_2=email_2, email_3=email_3)
+                       email_1=email_1, email_2=email_2, email_3=email_3, address=address)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
