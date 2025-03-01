@@ -120,9 +120,12 @@ class ContactHelper:
                     lastname = wd.find_element_by_xpath(f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[2]").text
                     id = element.find_element_by_name("selected[]").get_attribute("value")
                     all_phones = wd.find_element_by_xpath(
-                        f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[6]").text.splitlines()
-                    self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id,
-                                                      home=all_phones[0], mobile=all_phones[1], work=all_phones[2]))
+                        f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[6]").text
+                    all_emails = wd.find_element_by_xpath(
+                        f"//table[@id='maintable']/tbody/tr[{index + 2}]/td[5]").text
+                    self.contact_cache.append(Contact(firstname=firstname, lastname=lastname,
+                                                      id=id, all_phones_from_home_page=all_phones,
+                                                      all_emails_from_home_page=all_emails))
                     index += 1
         return list(self.contact_cache)
 
@@ -145,8 +148,12 @@ class ContactHelper:
         home = wd.find_element_by_name("home").get_attribute("value")
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         work = wd.find_element_by_name("work").get_attribute("value")
+        email_1 = wd.find_element_by_name("email").get_attribute("value")
+        email_2 = wd.find_element_by_name("email2").get_attribute("value")
+        email_3 = wd.find_element_by_name("email3").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id,
-                       home=home, mobile=mobile, work=work)
+                       home=home, mobile=mobile, work=work,
+                       email_1=email_1, email_2=email_2, email_3=email_3)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
