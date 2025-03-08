@@ -3,7 +3,7 @@ import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from model.contact import Contact
-from Data.add_contact import constant as testdata
+from data.contacts import constant as testdata
 
 @pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
 def test_add_contact(app, contact):

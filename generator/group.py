@@ -1,5 +1,3 @@
-import json
-
 from model.group import Group
 import random
 import string
@@ -16,7 +14,7 @@ except getopt.GetoptError as err:
     sys.exit(2)
 
 n = 5
-f = "Data/groups.json"
+f = "data/groups.json"
 
 for o, a in opts:
     if o == "-n":
