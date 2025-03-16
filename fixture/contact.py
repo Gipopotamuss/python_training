@@ -67,6 +67,11 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
+    def select_edit_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath('//a[contains(@href, "edit.php?id=%s")]' % id).click()
+
+
     def edit_first_contact(self):
         self.edit_contact_by_index(0)
 
@@ -178,4 +183,14 @@ class ContactHelper:
         self.select_contact_by_id(id)
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.contact_cache = None
+
+    def edit_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+        self.open_homepage()
+        # edit contact
+        self.select_edit_contact_by_id(id)
+        self.init(new_contact_data)
+        # submit edit
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.contact_cache = None
