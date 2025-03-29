@@ -19,12 +19,16 @@ from model.contact import Contact
 
 
 def test_contact_on_homepage(app, db):
-    contacts_from_homepage = app.contact.get_contact_list()
-    contacts_from_db = db.get_contact_list()
+    contacts_from_homepage = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    contacts_from_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
+    index = 0
     for element in contacts_from_homepage:
-        contact = contacts_from_db.index(element)
-        assert element.all_phones_from_home_page == merge_phones_like_on_home_page(contacts_from_db[contact])
-        assert element.all_emails_from_home_page == merge_emails_like_on_home_page(contacts_from_db[contact])
+        assert element.all_phones_from_home_page == merge_phones_like_on_home_page(contacts_from_db[index])
+        assert element.all_emails_from_home_page == merge_emails_like_on_home_page(contacts_from_db[index])
+        assert element.firstname == contacts_from_db[index].firstname
+        assert element.lastname == contacts_from_db[index].lastname
+        assert element.address == contacts_from_db[index].address
+        index += 1
 
 def clear(s):
     return re.sub("[() -]", "", s)
