@@ -1,0 +1,8 @@
+pytest==8.3.5
+pytest-bdd==8.1.0
+selenium==3.141.0
+jsonpickle==4.0.2
+pony==0.7.19
+PyMySQL==1.1.1
+urllib3==1.26.16
+mysql-connector-python-rf
