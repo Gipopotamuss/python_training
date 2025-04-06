@@ -2,7 +2,6 @@ from pytest_bdd import given, when, then
 from model.group import Group
 import random
 
-
 @given('a group list')
 def group_list(db):
     return db.get_group_list()
