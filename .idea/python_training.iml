@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.env" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/env37" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11 virtualenv at C:\Devel\python_training\env" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
